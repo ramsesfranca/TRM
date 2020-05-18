@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EstudoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EstudoModelStoreContainer">
+    <EntitySet Name="Acao" EntityType="EstudoModel.Store.Acao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Funcionalidade" EntityType="EstudoModel.Store.Funcionalidade" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Modulo" EntityType="EstudoModel.Store.Modulo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Perfil" EntityType="EstudoModel.Store.Perfil" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Permissao" EntityType="EstudoModel.Store.Permissao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Usuario" EntityType="EstudoModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Movimentacao" EntityType="EstudoModel.Store.Movimentacao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cliente" EntityType="EstudoModel.Store.Cliente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Estacionamento" EntityType="EstudoModel.Store.Estacionamento" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cancela" EntityType="EstudoModel.Store.Cancela" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Competencia" EntityType="EstudoModel.Store.Competencia" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FuncionalidadeAcao" EntityType="EstudoModel.Store.FuncionalidadeAcao" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AcaoPermissao" Association="EstudoModel.Store.FK_AcaoPermissao">
+      <End Role="Acao" EntitySet="Acao" />
+      <End Role="Permissao" EntitySet="Permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FuncionalidadePermissao" Association="EstudoModel.Store.FK_FuncionalidadePermissao">
+      <End Role="Funcionalidade" EntitySet="Funcionalidade" />
+      <End Role="Permissao" EntitySet="Permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PerfilPermissao" Association="EstudoModel.Store.FK_PerfilPermissao">
+      <End Role="Perfil" EntitySet="Perfil" />
+      <End Role="Permissao" EntitySet="Permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FuncionalidadeAcao_Acao" Association="EstudoModel.Store.FK_FuncionalidadeAcao_Acao">
+      <End Role="Acao" EntitySet="Acao" />
+      <End Role="FuncionalidadeAcao" EntitySet="FuncionalidadeAcao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FuncionalidadeAcao_Funcionalidade" Association="EstudoModel.Store.FK_FuncionalidadeAcao_Funcionalidade">
+      <End Role="Funcionalidade" EntitySet="Funcionalidade" />
+      <End Role="FuncionalidadeAcao" EntitySet="FuncionalidadeAcao" />
+    </AssociationSet>
+    <AssociationSet Name="FuncionalidadeModulo" Association="EstudoModel.Store.FuncionalidadeModulo">
+      <End Role="Funcionalidade" EntitySet="Funcionalidade" />
+      <End Role="Modulo" EntitySet="Modulo" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioPerfil" Association="EstudoModel.Store.UsuarioPerfil">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Perfil" EntitySet="Perfil" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteEstacionamento" Association="EstudoModel.Store.ClienteEstacionamento">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Estacionamento" EntitySet="Estacionamento" />
+    </AssociationSet>
+    <AssociationSet Name="CancelaEstacionamento" Association="EstudoModel.Store.CancelaEstacionamento">
+      <End Role="Cancela" EntitySet="Cancela" />
+      <End Role="Estacionamento" EntitySet="Estacionamento" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioCancela" Association="EstudoModel.Store.UsuarioCancela">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancela" EntitySet="Cancela" />
+    </AssociationSet>
+    <AssociationSet Name="MovimentacaoUsuario" Association="EstudoModel.Store.MovimentacaoUsuario">
+      <End Role="Movimentacao" EntitySet="Movimentacao" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="CompetenciaCliente" Association="EstudoModel.Store.CompetenciaCliente">
+      <End Role="Competencia" EntitySet="Competencia" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="CompetenciaMovimentacao" Association="EstudoModel.Store.CompetenciaMovimentacao">
+      <End Role="Competencia" EntitySet="Competencia" />
+      <End Role="Movimentacao" EntitySet="Movimentacao" />
+    </AssociationSet>
+    <AssociationSet Name="MovimentacaoCliente" Association="EstudoModel.Store.MovimentacaoCliente">
+      <End Role="Movimentacao" EntitySet="Movimentacao" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Acao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Texto" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Funcionalidade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Texto" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Controlador" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Acao" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Ordem" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ModuloId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Modulo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Area" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Ordem" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perfil">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="Permissao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PerfilId" Type="int" Nullable="false" />
+    <Property Name="FuncionalidadeId" Type="int" Nullable="false" />
+    <Property Name="AcaoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="CPF" Type="nvarchar" Nullable="false" MaxLength="18" />
+    <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Senha" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DataHoraLogin" Type="datetime" Nullable="true" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="PerfilId" Type="int" Nullable="false" />
+    <Property Name="CancelaId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Movimentacao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlacaCarro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Marca" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Modelo" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Ticket" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="DataHoraEntrada" Type="datetime" Nullable="false" />
+    <Property Name="DataHoraSaida" Type="datetime" Nullable="true" />
+    <Property Name="TipoMovimentacao" Type="int" Nullable="false" />
+    <Property Name="UsuarioId" Type="int" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="CNPJ" Type="nvarchar" Nullable="false" MaxLength="18" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Estacionamento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="Endereco" Type="nvarchar" Nullable="false" MaxLength="80" />
+    <Property Name="QtdVagas" Type="int" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cancela">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EstacionamentoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Competencia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Pago" Type="bit" Nullable="false" />
+    <Property Name="Mes" Type="int" Nullable="false" />
+    <Property Name="Ano" Type="int" Nullable="false" />
+    <Property Name="ClienteId" Type="int" Nullable="false" />
+    <Property Name="MovimentacaoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FuncionalidadeAcao">
+    <Key>
+      <PropertyRef Name="Acoes_Id" />
+      <PropertyRef Name="FuncionalidadeAcao_Acao_Id" />
+    </Key>
+    <Property Name="Acoes_Id" Type="int" Nullable="false" />
+    <Property Name="FuncionalidadeAcao_Acao_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AcaoPermissao">
+    <End Role="Acao" Type="EstudoModel.Store.Acao" Multiplicity="1" />
+    <End Role="Permissao" Type="EstudoModel.Store.Permissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Acao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permissao">
+        <PropertyRef Name="AcaoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FuncionalidadePermissao">
+    <End Role="Funcionalidade" Type="EstudoModel.Store.Funcionalidade" Multiplicity="1" />
+    <End Role="Permissao" Type="EstudoModel.Store.Permissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionalidade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permissao">
+        <PropertyRef Name="FuncionalidadeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PerfilPermissao">
+    <End Role="Perfil" Type="EstudoModel.Store.Perfil" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Permissao" Type="EstudoModel.Store.Permissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Permissao">
+        <PropertyRef Name="PerfilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FuncionalidadeModulo">
+    <End Role="Funcionalidade" Type="EstudoModel.Store.Funcionalidade" Multiplicity="*" />
+    <End Role="Modulo" Type="EstudoModel.Store.Modulo" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Modulo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Funcionalidade">
+        <PropertyRef Name="ModuloId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioPerfil">
+    <End Role="Usuario" Type="EstudoModel.Store.Usuario" Multiplicity="*" />
+    <End Role="Perfil" Type="EstudoModel.Store.Perfil" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="PerfilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClienteEstacionamento">
+    <End Role="Cliente" Type="EstudoModel.Store.Cliente" Multiplicity="1" />
+    <End Role="Estacionamento" Type="EstudoModel.Store.Estacionamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estacionamento">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CancelaEstacionamento">
+    <End Role="Cancela" Type="EstudoModel.Store.Cancela" Multiplicity="*" />
+    <End Role="Estacionamento" Type="EstudoModel.Store.Estacionamento" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Estacionamento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cancela">
+        <PropertyRef Name="EstacionamentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioCancela">
+    <End Role="Usuario" Type="EstudoModel.Store.Usuario" Multiplicity="*" />
+    <End Role="Cancela" Type="EstudoModel.Store.Cancela" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Cancela">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="CancelaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MovimentacaoUsuario">
+    <End Role="Movimentacao" Type="EstudoModel.Store.Movimentacao" Multiplicity="*" />
+    <End Role="Usuario" Type="EstudoModel.Store.Usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movimentacao">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompetenciaCliente">
+    <End Role="Competencia" Type="EstudoModel.Store.Competencia" Multiplicity="*" />
+    <End Role="Cliente" Type="EstudoModel.Store.Cliente" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompetenciaMovimentacao">
+    <End Role="Competencia" Type="EstudoModel.Store.Competencia" Multiplicity="*" />
+    <End Role="Movimentacao" Type="EstudoModel.Store.Movimentacao" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Movimentacao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="MovimentacaoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MovimentacaoCliente">
+    <End Role="Movimentacao" Type="EstudoModel.Store.Movimentacao" Multiplicity="*" />
+    <End Role="Cliente" Type="EstudoModel.Store.Cliente" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movimentacao">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FuncionalidadeAcao_Acao">
+    <End Role="Acao" Type="EstudoModel.Store.Acao" Multiplicity="1" />
+    <End Role="FuncionalidadeAcao" Type="EstudoModel.Store.FuncionalidadeAcao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Acao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncionalidadeAcao">
+        <PropertyRef Name="Acoes_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FuncionalidadeAcao_Funcionalidade">
+    <End Role="FuncionalidadeAcao" Type="EstudoModel.Store.FuncionalidadeAcao" Multiplicity="*" />
+    <End Role="Funcionalidade" Type="EstudoModel.Store.Funcionalidade" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionalidade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncionalidadeAcao">
+        <PropertyRef Name="FuncionalidadeAcao_Acao_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EstudoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Acao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Permissoes" Relationship="Self.FK_AcaoPermissao" FromRole="Acao" ToRole="Permissao" />
+          <Property Name="Texto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Funcionalidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Texto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Controlador" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Acao" Type="String" Nullable="true" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Ordem" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="EstudoModel.Status" Nullable="false" />
+          <NavigationProperty Name="Modulo" Relationship="EstudoModel.FuncionalidadeModulo" FromRole="Funcionalidade" ToRole="Modulo" />
+          <NavigationProperty Name="Permissoes" Relationship="Self.FK_FuncionalidadePermissao" FromRole="Funcionalidade" ToRole="Permissao" />
+          <NavigationProperty Name="Acoes" Relationship="Self.FuncionalidadeAcao" FromRole="Funcionalidade" ToRole="Acao" />
+          <Property Name="ModuloId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Ordem" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="EstudoModel.Status" Nullable="false" />
+          <NavigationProperty Name="Funcionalidades" Relationship="EstudoModel.FuncionalidadeModulo" FromRole="Modulo" ToRole="Funcionalidade" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Permissoes" Relationship="Self.FK_PerfilPermissao" FromRole="Perfil" ToRole="Permissao" />
+        </EntityType>
+        <EntityType Name="Permissao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerfilId" Type="Int32" Nullable="false" />
+          <Property Name="FuncionalidadeId" Type="Int32" Nullable="false" />
+          <Property Name="AcaoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK_PerfilPermissao" FromRole="Permissao" ToRole="Perfil" />
+          <NavigationProperty Name="Acao" Relationship="Self.FK_AcaoPermissao" FromRole="Permissao" ToRole="Acao" />
+          <NavigationProperty Name="Funcionalidade" Relationship="Self.FK_FuncionalidadePermissao" FromRole="Permissao" ToRole="Funcionalidade" />
+        </EntityType>
+        <Association Name="FK_AcaoPermissao">
+          <End Role="Acao" Type="Self.Acao" Multiplicity="1" />
+          <End Role="Permissao" Type="Self.Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permissao">
+              <PropertyRef Name="AcaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FuncionalidadePermissao">
+          <End Role="Funcionalidade" Type="Self.Funcionalidade" Multiplicity="1" />
+          <End Role="Permissao" Type="Self.Permissao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionalidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permissao">
+              <PropertyRef Name="FuncionalidadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerfilPermissao">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Permissao" Type="Self.Permissao" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permissao">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FuncionalidadeAcao">
+          <End Role="Acao" Type="Self.Acao" Multiplicity="*" />
+          <End Role="Funcionalidade" Type="Self.Funcionalidade" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ModeloContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acao" EntityType="Self.Acao" />
+          <EntitySet Name="Funcionalidade" EntityType="Self.Funcionalidade" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="Permissao" EntityType="Self.Permissao" />
+          <AssociationSet Name="FK_AcaoPermissao" Association="Self.FK_AcaoPermissao">
+            <End Role="Acao" EntitySet="Acao" />
+            <End Role="Permissao" EntitySet="Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FuncionalidadePermissao" Association="Self.FK_FuncionalidadePermissao">
+            <End Role="Funcionalidade" EntitySet="Funcionalidade" />
+            <End Role="Permissao" EntitySet="Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerfilPermissao" Association="Self.FK_PerfilPermissao">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Permissao" EntitySet="Permissao" />
+          </AssociationSet>
+          <AssociationSet Name="FuncionalidadeAcao" Association="Self.FuncionalidadeAcao">
+            <End Role="Acao" EntitySet="Acao" />
+            <End Role="Funcionalidade" EntitySet="Funcionalidade" />
+          </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="EstudoModel.Usuario" />
+          <AssociationSet Name="FuncionalidadeModulo" Association="EstudoModel.FuncionalidadeModulo">
+            <End Role="Funcionalidade" EntitySet="Funcionalidade" />
+            <End Role="Modulo" EntitySet="Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioPerfil" Association="EstudoModel.UsuarioPerfil">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
+          <EntitySet Name="Movimentacao" EntityType="EstudoModel.Movimentacao" />
+          <EntitySet Name="Cliente" EntityType="EstudoModel.Cliente" />
+          <EntitySet Name="Estacionamento" EntityType="EstudoModel.Estacionamento" />
+          <AssociationSet Name="ClienteEstacionamento" Association="EstudoModel.ClienteEstacionamento">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Estacionamento" EntitySet="Estacionamento" />
+          </AssociationSet>
+          <EntitySet Name="Cancela" EntityType="EstudoModel.Cancela" />
+          <AssociationSet Name="CancelaEstacionamento" Association="EstudoModel.CancelaEstacionamento">
+            <End Role="Cancela" EntitySet="Cancela" />
+            <End Role="Estacionamento" EntitySet="Estacionamento" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioCancela" Association="EstudoModel.UsuarioCancela">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cancela" EntitySet="Cancela" />
+          </AssociationSet>
+          <AssociationSet Name="MovimentacaoUsuario" Association="EstudoModel.MovimentacaoUsuario">
+            <End Role="Movimentacao" EntitySet="Movimentacao" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Competencia" EntityType="EstudoModel.Competencia" />
+          <AssociationSet Name="CompetenciaCliente" Association="EstudoModel.CompetenciaCliente">
+            <End Role="Competencia" EntitySet="Competencia" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="CompetenciaMovimentacao" Association="EstudoModel.CompetenciaMovimentacao">
+            <End Role="Competencia" EntitySet="Competencia" />
+            <End Role="Movimentacao" EntitySet="Movimentacao" />
+          </AssociationSet>
+          <AssociationSet Name="MovimentacaoCliente" Association="EstudoModel.MovimentacaoCliente">
+            <End Role="Movimentacao" EntitySet="Movimentacao" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          </EntityContainer>
+        <EnumType Name="Status" a:ExternalTypeName="TPRM.SAP.Modelo.Enums" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="18" Unicode="true" FixedLength="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="DataHoraLogin" Type="DateTime" Nullable="true" />
+          <Property Name="Status" Type="EstudoModel.Status" Nullable="false" />
+          <NavigationProperty Name="Perfil" Relationship="EstudoModel.UsuarioPerfil" FromRole="Usuario" ToRole="Perfil" />
+          <Property Name="PerfilId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cancela" Relationship="EstudoModel.UsuarioCancela" FromRole="Usuario" ToRole="Cancela" />
+          <Property Name="CancelaId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Movimentacoes" Relationship="EstudoModel.MovimentacaoUsuario" FromRole="Usuario" ToRole="Movimentacao" />
+        </EntityType>
+        <Association Name="FuncionalidadeModulo">
+          <End Type="EstudoModel.Funcionalidade" Role="Funcionalidade" Multiplicity="*" />
+          <End Type="EstudoModel.Modulo" Role="Modulo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Funcionalidade">
+              <PropertyRef Name="ModuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="TipoEmpresa" a:ExternalTypeName="TPRM.SAP.Modelo.Enums" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="StatusTransacao" a:ExternalTypeName="TPRM.SAP.Modelo.Enums" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <Association Name="UsuarioPerfil">
+          <End Type="EstudoModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="EstudoModel.Perfil" Role="Perfil" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="PerfilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Movimentacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlacaCarro" Type="String" Nullable="false" />
+          <Property Name="Marca" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Modelo" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Ticket" Type="String" Nullable="false" MaxLength="10" />
+          <Property Name="DataHoraEntrada" Type="DateTime" Nullable="false" />
+          <Property Name="DataHoraSaida" Type="DateTime" Nullable="true" />
+          <Property Name="TipoMovimentacao" Type="EstudoModel.TipoMovimentacao" Nullable="false" />
+          <NavigationProperty Name="Operador" Relationship="EstudoModel.MovimentacaoUsuario" FromRole="Movimentacao" ToRole="Usuario" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="EstudoModel.MovimentacaoCliente" FromRole="Movimentacao" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="CNPJ" Type="String" Nullable="false" MaxLength="18" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="Estacionamentos" Relationship="EstudoModel.ClienteEstacionamento" FromRole="Cliente" ToRole="Estacionamento" />
+        </EntityType>
+        <EntityType Name="Estacionamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="80" />
+          <Property Name="QtdVagas" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="EstudoModel.ClienteEstacionamento" FromRole="Estacionamento" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cancelas" Relationship="EstudoModel.CancelaEstacionamento" FromRole="Estacionamento" ToRole="Cancela" />
+        </EntityType>
+        <Association Name="ClienteEstacionamento">
+          <End Type="EstudoModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="EstudoModel.Estacionamento" Role="Estacionamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estacionamento">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cancela">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <NavigationProperty Name="Estacionamento" Relationship="EstudoModel.CancelaEstacionamento" FromRole="Cancela" ToRole="Estacionamento" />
+          <Property Name="EstacionamentoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="EstudoModel.UsuarioCancela" FromRole="Cancela" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="CancelaEstacionamento">
+          <End Type="EstudoModel.Cancela" Role="Cancela" Multiplicity="*" />
+          <End Type="EstudoModel.Estacionamento" Role="Estacionamento" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancela">
+              <PropertyRef Name="EstacionamentoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsuarioCancela">
+          <End Type="EstudoModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="EstudoModel.Cancela" Role="Cancela" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cancela">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="CancelaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="TipoMovimentacao" a:ExternalTypeName="TPRM.SAP.Modelo.Enums" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <Association Name="MovimentacaoUsuario">
+          <End Type="EstudoModel.Movimentacao" Role="Movimentacao" Multiplicity="*" />
+          <End Type="EstudoModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimentacao">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Competencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Pago" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="EstudoModel.CompetenciaCliente" FromRole="Competencia" ToRole="Cliente" />
+          <Property Name="Mes" Type="Int32" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movimentacao" Relationship="EstudoModel.CompetenciaMovimentacao" FromRole="Competencia" ToRole="Movimentacao" />
+          <Property Name="MovimentacaoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CompetenciaCliente">
+          <End Type="EstudoModel.Competencia" Role="Competencia" Multiplicity="*" />
+          <End Type="EstudoModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competencia">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompetenciaMovimentacao">
+          <End Type="EstudoModel.Competencia" Role="Competencia" Multiplicity="*" />
+          <End Type="EstudoModel.Movimentacao" Role="Movimentacao" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Movimentacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competencia">
+              <PropertyRef Name="MovimentacaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MovimentacaoCliente">
+          <End Type="EstudoModel.Movimentacao" Role="Movimentacao" Multiplicity="*" />
+          <End Type="EstudoModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimentacao">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EstudoModelStoreContainer" CdmEntityContainer="ModeloContainer">
+    <EntitySetMapping Name="Acao">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Acao)">
+        <MappingFragment StoreEntitySet="Acao">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Funcionalidade">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Funcionalidade)">
+        <MappingFragment StoreEntitySet="Funcionalidade">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+          <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+          <ScalarProperty Name="Acao" ColumnName="Acao" />
+          <ScalarProperty Name="Ordem" ColumnName="Ordem" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ModuloId" ColumnName="ModuloId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modulo">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Modulo)">
+        <MappingFragment StoreEntitySet="Modulo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Ordem" ColumnName="Ordem" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Perfil">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Perfil)">
+        <MappingFragment StoreEntitySet="Perfil">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissao">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Permissao)">
+        <MappingFragment StoreEntitySet="Permissao">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+          <ScalarProperty Name="FuncionalidadeId" ColumnName="FuncionalidadeId" />
+          <ScalarProperty Name="AcaoId" ColumnName="AcaoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Usuario)">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="DataHoraLogin" ColumnName="DataHoraLogin" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PerfilId" ColumnName="PerfilId" />
+          <ScalarProperty Name="CancelaId" ColumnName="CancelaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movimentacao">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Movimentacao)">
+        <MappingFragment StoreEntitySet="Movimentacao">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlacaCarro" ColumnName="PlacaCarro" />
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+          <ScalarProperty Name="DataHoraEntrada" ColumnName="DataHoraEntrada" />
+          <ScalarProperty Name="DataHoraSaida" ColumnName="DataHoraSaida" />
+          <ScalarProperty Name="TipoMovimentacao" ColumnName="TipoMovimentacao" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Cliente)">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estacionamento">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Estacionamento)">
+        <MappingFragment StoreEntitySet="Estacionamento">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="QtdVagas" ColumnName="QtdVagas" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cancela">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Cancela)">
+        <MappingFragment StoreEntitySet="Cancela">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="EstacionamentoId" ColumnName="EstacionamentoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competencia">
+      <EntityTypeMapping TypeName="IsTypeOf(EstudoModel.Competencia)">
+        <MappingFragment StoreEntitySet="Competencia">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Pago" ColumnName="Pago" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="MovimentacaoId" ColumnName="MovimentacaoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FuncionalidadeAcao" TypeName="EstudoModel.FuncionalidadeAcao" StoreEntitySet="FuncionalidadeAcao">
+      <EndProperty Name="Acao">
+        <ScalarProperty Name="Id" ColumnName="Acoes_Id" />
+      </EndProperty>
+      <EndProperty Name="Funcionalidade">
+        <ScalarProperty Name="Id" ColumnName="FuncionalidadeAcao_Acao_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

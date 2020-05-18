@@ -1,0 +1,45 @@
+﻿@model TPRM.SAP.Web.Models.RedefinirSenhaViewModel
+@using TPRM.SAP.Web.Helpers;
+
+<br />
+<h4>Redefinir Senha</h4>
+<hr />
+<div class="col-md-12">
+    <div class="col-sm-4 col-sm-offset-2">
+        <hgroup>
+            <h3><strong>Projeto de Teste ou Estudo do Framework básico</strong></h3>
+            <h4>Sistema de Gestão</h4>
+        </hgroup>
+    </div>
+    <div class="col-sm-4">
+        <section id="loginForm">
+            @using (Html.BeginForm("RedefinirSenha", "Conta", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Email)
+                @Html.HiddenFor(model => model.Codigo)
+
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NovaSenha, new { @class = "control-label" }, false)
+                    @Html.PasswordFor(model => model.NovaSenha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NovaSenha, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmarSenha, new { @class = "control-label" }, false)
+                    @Html.PasswordFor(model => model.ConfirmarSenha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmarSenha, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-flat" />
+                </div>
+            }
+        </section>
+        <br />
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

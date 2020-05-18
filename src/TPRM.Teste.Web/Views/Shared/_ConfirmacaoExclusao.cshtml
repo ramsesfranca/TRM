@@ -1,0 +1,28 @@
+﻿@model  TPRM.SAP.Web.Models.ConfirmacaoExclusaoViewModel
+
+@using (Html.BeginForm(Model.PostAcaoExcluir, Model.PostControleExcluir, FormMethod.Post))
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">
+            Notificação de exclusão
+        </h4>
+    </div>
+    <div class="modal-body">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.PostAcaoExcluir)
+        @Html.HiddenFor(model => model.PostControleExcluir)
+        @Html.HiddenFor(model => model.TextoCabecalho)
+
+        <p>Você deseja realmente apagar este registro?</p>
+        <p class="text-danger">@Html.DisplayFor(model => model.TextoCabecalho)</p>
+        <p>Para deletar o registro, por favor aperte no botão para confirmar a sua escolha, ou cancelar para voltar à página.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Confirmar</button>
+        <button class="btn btn-white" data-dismiss="modal">Cancelar</button>
+    </div>
+}

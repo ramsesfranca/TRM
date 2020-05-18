@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3be6ed47b8ae4f7a865cec573f9d500a" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="EstudoModel.Acao" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstudoModel.Funcionalidade" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstudoModel.Modulo" Width="1.5" PointX="9.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstudoModel.Perfil" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstudoModel.Permissao" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="EstudoModel.FK_AcaoPermissao" ManuallyRouted="false" />
+        <AssociationConnector Association="EstudoModel.FK_FuncionalidadePermissao" ManuallyRouted="false" />
+        <AssociationConnector Association="EstudoModel.FK_PerfilPermissao" ManuallyRouted="false" />
+        <AssociationConnector Association="EstudoModel.FuncionalidadeAcao" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EstudoModel.Usuario" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="EstudoModel.FuncionalidadeModulo" />
+        <AssociationConnector Association="EstudoModel.UsuarioPerfil" />
+        <EntityTypeShape EntityType="EstudoModel.Movimentacao" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="EstudoModel.Cliente" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="EstudoModel.Estacionamento" Width="1.5" PointX="9.75" PointY="2.5" />
+        <AssociationConnector Association="EstudoModel.ClienteEstacionamento" />
+        <EntityTypeShape EntityType="EstudoModel.Cancela" Width="1.5" PointX="7.5" PointY="8.5" />
+        <AssociationConnector Association="EstudoModel.CancelaEstacionamento" />
+        <AssociationConnector Association="EstudoModel.UsuarioCancela" />
+        <AssociationConnector Association="EstudoModel.MovimentacaoUsuario" />
+        <EntityTypeShape EntityType="EstudoModel.Competencia" Width="1.5" PointX="0.75" PointY="4" />
+        <AssociationConnector Association="EstudoModel.CompetenciaCliente" />
+        <AssociationConnector Association="EstudoModel.CompetenciaMovimentacao" />
+        <AssociationConnector Association="EstudoModel.MovimentacaoCliente" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,139 @@
+﻿@model TPRM.SAP.Web.Areas.Sistema.Models.AlterarPerfilViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-10 col-sm-offset-1">
+    <h4>Alterar Perfil</h4>
+    <hr />
+
+    @using (Html.BeginForm("Alterar", "Perfil", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @if (Model.Id != 1 && Model.Id != 2)
+                    {
+                        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", disabled = "disabled" })
+                    }
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Modulos, new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center col-md-1">Módulos</th>
+                                    <th class="text-center col-md-1">Funcionalidades</th>
+                                    <th class="text-center col-md-1">Inserir</th>
+                                    <th class="text-center col-md-1">Alterar</th>
+                                    <th class="text-center col-md-1">Deletar</th>
+                                    <th class="text-center col-md-1">Visualizar</th>
+                                    <th class="text-center col-md-1">Avaliar</th>
+                                    <th class="text-center col-md-1">Marcar/Desmarcar Todos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @for (int i = 0; i < Model.Modulos.Count; i++)
+                                {
+                                    for (int j = 0; j < Model.Modulos[i].Funcionalidades.Count; j++)
+                                    {
+                                        int contador = 0;
+
+                                        <tr>
+                                            @if (j == 0)
+                                            {
+                                                <td class="text-center alinhamento-vertical" rowspan="@Model.Modulos[i].Funcionalidades.Count">
+                                                    @Html.HiddenFor(model => Model.Modulos[i].Id)
+                                                    @Html.DisplayFor(model => Model.Modulos[i].Nome)
+                                                </td>
+                                            }
+
+                                            <td class="text-center alinhamento-vertical">
+                                                @Html.HiddenFor(model => Model.Modulos[i].Funcionalidades[j].Id)
+                                                @Html.DisplayFor(model => Model.Modulos[i].Funcionalidades[j].Texto)
+                                            </td>
+
+                                            @for (int k = 0; k < 6; k++)
+                                            {
+                                                if (k != 3)
+                                                {
+                                                    if (Model.Modulos[i].Funcionalidades[j].Acoes.Any(x => x.Id.Equals(k + 1)))
+                                                    {
+                                                        <td class="text-center">
+                                                            @Html.HiddenFor(model => Model.Modulos[i].Funcionalidades[j].Acoes[contador].Id)
+                                                            @Html.CheckBoxFor(model => Model.Modulos[i].Funcionalidades[j].Acoes[contador].Verificado, new { @class = "caso" })
+                                                        </td>
+
+                                                        contador++;
+                                                    }
+                                                    else
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                }
+                                            }
+
+                                            <td class="text-center">
+                                                @Html.CheckBoxFor(model => Model.Modulos[i].Funcionalidades[j].SelecionarTodos, new { @class = "selecionarTodos" })
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-flat" />
+                    <a href="@Url.Action("Index")" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/formulario")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".selecionarTodos").click(function (e) {
+                $("td input:checkbox", $(e.target).closest("tr")).prop("checked", this.checked);
+            });
+
+            $(".caso").click(function (e) {
+                var quantidadeTds = $("td input:checkbox[class^='caso']", $(e.target).closest("tr")).length;
+                var qantidadeTdsMarcadas = $("td input:checkbox[class^='caso']:checked", $(e.target).closest("tr")).length;
+
+                if (quantidadeTds === qantidadeTdsMarcadas) {
+                    $("td input:checkbox[class^='selecionarTodos']", $(e.target).closest("tr")).prop("checked", true);
+                } else {
+                    $("td input:checkbox[class^='selecionarTodos']", $(e.target).closest("tr")).prop("checked", false);
+                }
+
+            });
+        });
+    </script>
+}

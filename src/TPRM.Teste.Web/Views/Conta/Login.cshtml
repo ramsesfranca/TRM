@@ -1,0 +1,49 @@
+﻿@model TPRM.SAP.Web.Models.LoginViewModel
+
+<br />
+<h4>Identificação - Acesso Administrativo</h4>
+<hr />
+<div class="col-md-12">
+    <div class="col-sm-4 col-sm-offset-2">
+        <hgroup>
+            <h3><strong>Sistema Automatização de Processos</strong></h3>
+        </hgroup>
+    </div>
+    <div class="col-sm-4">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Conta", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <br />
+                <div class="form-group">
+                    <strong>Por favor, faça o login para continuar</strong>
+                    <br />
+                    @Html.LabelFor(model => model.Login, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Login, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Senha, new { @class = "control-label" })
+                    @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(model => model.Lembrar)
+                            @Html.DisplayNameFor(model => model.Lembrar)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Entrar" class="btn btn-primary btn-flat" />
+                </div>
+            }
+        </section>
+        <br />
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

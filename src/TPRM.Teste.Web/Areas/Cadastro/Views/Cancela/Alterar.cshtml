@@ -1,0 +1,76 @@
+﻿@model TPRM.SAP.Web.Areas.Cadastro.Models.AlterarCancelaViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-10 col-sm-offset-1">
+    <h4>Alterar Cancela</h4>
+    <hr />
+    @using (Html.BeginForm("Alterar", "Cancela", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteId, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @if (ViewBag.ListaCliente != null && ((IEnumerable<dynamic>)ViewBag.ListaCliente).Count() > 0)
+                    {
+                        @Html.DropDownListFor(model => model.ClienteId, new SelectList(ViewBag.ListaCliente, "Id", "Nome"),
+                            "Selecione", new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.ClienteId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Nome"),
+                            "Nenhum item foi cadastrado", new { @class = "form-control", disabled = "disabled" })
+                    }
+                    @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EstacionamentoId, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @if (ViewBag.ListaEstacionamento != null && ((IEnumerable<dynamic>)ViewBag.ListaEstacionamento).Count() > 0)
+                    {
+                        @Html.DropDownListFor(model => model.EstacionamentoId, new SelectList(ViewBag.ListaEstacionamento, "Id", "Nome"),
+                            "Selecione", new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(model => model.EstacionamentoId, new SelectList(Enumerable.Empty<SelectListItem>()),
+                            "Selecione o Cliente", new { @class = "form-control", @disabled = "disabled" })
+                    }
+                    @Html.ValidationMessageFor(model => model.EstacionamentoId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-flat" />
+                    <a href="@Url.Action("Index")" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/formulario")
+    @Scripts.Render("~/bundles/cancela")
+
+    <script type="text/javascript">
+        var urlEstacionamento = '@Url.Action("SelecionarEstacionamentoPorCliente", "Cancela")';
+    </script>
+}

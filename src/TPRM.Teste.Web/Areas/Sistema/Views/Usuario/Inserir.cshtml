@@ -1,0 +1,107 @@
+﻿@model TPRM.SAP.Web.Areas.Sistema.Models.InserirUsuarioViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-10 col-sm-offset-1">
+    <h4>Inserir Usuário</h4>
+    <hr />
+
+    @using (Html.BeginForm("Inserir", "Usuario", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CPF, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.CPF, new { @class = "form-control campoCPF" })
+                    @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Login, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Login, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Senha, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PerfilId, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.PerfilId, new MultiSelectList(ViewBag.ListaPerfil, "Id", "Nome"), "Selecione",
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerfilId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group operador">
+                @Html.LabelFor(model => model.ClienteId, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.ClienteId, new MultiSelectList(ViewBag.ListaCliente, "Id", "Nome"), "Selecione",
+                        new { @class = "form-control", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group operador">
+                @Html.LabelFor(model => model.EstacionamentoId, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.EstacionamentoId, new SelectList(Enumerable.Empty<SelectListItem>()),
+                        "Selecione o Cliente", new { @class = "form-control", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.EstacionamentoId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group operador">
+                @Html.LabelFor(model => model.CancelaId, new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.CancelaId, new SelectList(Enumerable.Empty<SelectListItem>()),
+                        "Selecione o Estacionamento", new { @class = "form-control", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.CancelaId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-flat" />
+                    <a href="@Url.Action("Index")" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/formulario")
+    @Scripts.Render("~/bundles/cancela")
+    @Scripts.Render("~/bundles/usuario")
+
+    <script type="text/javascript">
+        var urlEstacionamento = '@Url.Action("SelecionarEstacionamentoPorCliente", "Cancela", new { area = "Cadastro" })';
+        var urlCancela = '@Url.Action("SelecionarCancelaPorEstacionamento", "usuario", new { area = "Sistema" })';
+    </script>
+}

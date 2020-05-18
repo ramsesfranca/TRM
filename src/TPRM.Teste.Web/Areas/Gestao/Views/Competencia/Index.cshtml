@@ -1,0 +1,95 @@
+﻿@model TPRM.SAP.Web.Areas.Gestao.Models.ListaCompetenciaViewModel
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-10 col-sm-offset-1">
+    <div class="panel panel-default lista">
+        <div class="panel-heading">
+            <b>Lista de Competência</b>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th class="col-md-3 text-center">Mês</th>
+                    <th class="col-md-3 text-center">Ano</th>
+                    <th class="col-md-3 text-center">Valor</th>
+                    <th class="col-md-3 text-center">Pago</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+                @if (Model != null && Model.ListaPaginada.Count > 0)
+                {
+                    foreach (var item in Model.ListaPaginada)
+                    {
+                        <tr>
+                            <td class="text-center">@item.Mes</td>
+                            <td class="text-center">@item.Ano</td>
+                            <td class="text-center">@string.Format("{0:C}", item.Valor)</td>
+                            <td class="text-center">@(item.Pago == true ? "Sim" : "Não")</td>
+                            <td class="text-center">
+                                <div class="col-md-12">
+                                    @if (item.Pago != true)
+                                    {
+                                        @*@Html.ActionLink(" ", "Pagar", "Competencia", new { clienteId = item.ClienteId },
+                                            new { @class = "glyphicon glyphicon-edit", @title = "Pagar Competência" })*@
+                                        @Html.ActionLink(" ", "EnviarEmailCobranca", "Competencia", new { clienteId = item.ClienteId, mes = item.Mes, ano = item.Ano },
+                                            new { @class = "glyphicon glyphicon-envelope", @title = "Enviar e-mail Cobrança" })
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("NA")
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">Nenhum registro encontrado.</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div class="dt-toolbar-footer">
+        <div class="col-xs-12 hidden-xs">
+            <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">
+                @if (Model != null && Model.ListaPaginada.Count > 0)
+                {
+                    <span>Página(s) @Model.ListaPaginada.PageNumber de @Model.ListaPaginada.PageCount de @Model.ListaPaginada.TotalItemCount registro(s).</span>
+                }
+            </div>
+        </div>
+        <div class="text-center">
+            @if (Model != null && Model.ListaPaginada.PageCount > 1)
+            {
+                @Html.PagedListPager(Model.ListaPaginada, pagina => Url.Action("Index", new
+                {
+                    pagina
+                }), new PagedListRenderOptions
+                {
+                    LinkToFirstPageFormat = string.Format("<< Primeiro"),
+                    LinkToPreviousPageFormat = string.Format("< Anterior"),
+                    LinkToNextPageFormat = string.Format("Próximo >"),
+                    LinkToLastPageFormat = string.Format("Último >>"),
+                    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                    MaximumPageNumbersToDisplay = 5,
+                    ContainerDivClasses = new[] { "dataTables_paginate paging_simple_numbers" },
+                    UlElementClasses = new[] { "pagination pagination-sm" },
+                    LiElementClasses = new[] { "paginate_button" }
+                })
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Modal")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/sitemodal")
+    @Scripts.Render("~/bundles/formulario")
+}
